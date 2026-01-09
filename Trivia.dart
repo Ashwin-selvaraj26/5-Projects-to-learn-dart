@@ -31,22 +31,28 @@ class Trivia {
     }
     print("Enter the correct option:");
     var crtOption = stdin.readLineSync()!;
-    var question = Question(questionText, options, crtOption);
+    var question = Question(questionText, options, crtOption.toLowerCase());
     questionList.add(question);
   }
 
   testTrivia() {
-    for (int i = 0; i < questionList.length; i++) {
-      print("The score is $score");
-      var ques = questionList[i];
-      print(ques);
-      var answer = stdin.readLineSync();
-      if (answer == ques.crtOption) {
-        score++;
-        print("Correct answer!");
-      } else {
-        print("Wrong answer!");
+    score = 0;
+    if (questionList.length > 0){
+      for (int i = 0; i < questionList.length; i++) {
+        var ques = questionList[i];
+        print(ques);
+        var answer = stdin.readLineSync()!;
+        if (answer.toLowerCase() == ques.crtOption) {
+          score++;
+          print("Correct answer!");
+        } else {
+          print("Wrong answer!");
+        }
       }
+      print("The score is $score");
+    }
+    else{
+      print("No questions available. Create some questions first");
     }
   }
 }
@@ -55,7 +61,7 @@ void main() {
   var trivia = Trivia();
 
   while (true) {
-    print("1.Create questions | 2.Test | 3.quit");
+    print("1.Create questions | 2.Test | 3.Quit");
     try {
       var inp = int.parse(stdin.readLineSync()!);
       switch (inp) {
@@ -72,12 +78,19 @@ void main() {
               print("Invalid input!");
             }
           }
+          break;
 
         case 2:
           trivia.testTrivia();
+          break;
 
         case 3:
           return;
+
+        default:
+          print("Invalid input! Enter 1 or 2 or 3");
+          break;
+          
       }
     } catch (e) {
       print("Invalid input! Enter 1 or 2 or 3");
