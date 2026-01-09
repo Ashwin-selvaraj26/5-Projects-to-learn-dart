@@ -30,7 +30,7 @@ class Trivia {
       options.add(value);
     }
     print("Enter the correct option:");
-    var crtOption = stdin.readLineSync()!;
+    var crtOption = stdin.readLineSync()?? '';
     var question = Question(questionText, options, crtOption.toLowerCase());
     questionList.add(question);
   }
@@ -41,7 +41,7 @@ class Trivia {
       for (int i = 0; i < questionList.length; i++) {
         var ques = questionList[i];
         print(ques);
-        var answer = stdin.readLineSync()!;
+        var answer = stdin.readLineSync()?? '';
         if (answer.toLowerCase() == ques.crtOption) {
           score++;
           print("Correct answer!");
@@ -63,13 +63,13 @@ void main() {
   while (true) {
     print("1.Create questions | 2.Test | 3.Quit");
     try {
-      var inp = int.parse(stdin.readLineSync()!);
+      var inp = int.parse(stdin.readLineSync()?? '0');
       switch (inp) {
         case 1:
           while (true) {
             trivia.createQues();
             print("Add next? (y/n)");
-            var inp = stdin.readLineSync()!;
+            var inp = stdin.readLineSync()?? '';
             if (inp.toLowerCase() == 'y') {
               continue;
             } else if (inp.toLowerCase() == 'n') {
