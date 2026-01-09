@@ -9,10 +9,11 @@ class Question {
 
   @override
   String toString() {
-    return '''
-Q. $questionText.
-Options : $options
-''';
+    String retString = 'Q. $questionText.\n';
+    for (int i=1;i<=options.length;i++){
+      retString = retString + '$i. ${options[i-1]}\n';
+    }
+    return retString;
   }
 }
 
@@ -30,7 +31,16 @@ class Trivia {
       options.add(value);
     }
     print("Enter the correct option:");
-    var crtOption = stdin.readLineSync()?? '';
+    var crtOption;
+    while(true){
+      crtOption = stdin.readLineSync()?? '';
+      if (options.contains(crtOption)){
+        break;
+      }
+      else{
+        print("It is not in the options list!");
+      }
+    }
     var question = Question(questionText, options, crtOption.toLowerCase());
     questionList.add(question);
   }
@@ -63,7 +73,7 @@ void main() {
   while (true) {
     print("1.Create questions | 2.Test | 3.Quit");
     try {
-      var inp = int.parse(stdin.readLineSync()?? '0');
+      var inp = int.parse(stdin.readLineSync()?? '');
       switch (inp) {
         case 1:
           while (true) {
