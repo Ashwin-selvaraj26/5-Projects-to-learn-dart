@@ -22,11 +22,11 @@ class Trivia {
 
   createQues() {
     print("Enter question text:");
-    var questionText = stdin.readLineSync()!;
+    var questionText = stdin.readLineSync()?? '';
     List<String> options = [];
     print("Enter 3 Options:");
     for (int i = 0; i < 3; i++) {
-      var value = stdin.readLineSync()!;
+      var value = stdin.readLineSync()?? '';
       options.add(value);
     }
     print("Enter the correct option:");
